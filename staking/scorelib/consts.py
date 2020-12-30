@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2020 ICON Foundation
+# Copyright 2020 ICONation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from iconservice.iconscore.system_score import SystemScore
+from iconservice import *
 
+# ================================================
+#  Consts
+# ================================================
+MAX_ITERATION_LOOP = 100
 
-class System(SystemScore):
-    pass
+# ================================================
+#  Consts
+# ================================================
+TAG = 'SCORELib'
+VERSION = '0.1.0'
+ZERO_SCORE_ADDRESS = Address.from_string('cx0000000000000000000000000000000000000000')
