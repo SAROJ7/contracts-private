@@ -105,12 +105,6 @@ class IRC2(TokenStandard, IconScoreBase):
 		"""
 		return self._name.get()
 
-	@external
-	def set_admin(self, _address: Address):
-		if self.msg.sender != self.owner:
-			revert('only owner can call the function')
-		self._admin.set(_address)
-
 	@external(readonly=True)
 	def symbol(self) -> str:
 		"""
@@ -211,6 +205,8 @@ class IRC2(TokenStandard, IconScoreBase):
 			If the recipient is SCORE,
 			then calls `tokenFallback` to hand over control.
 			"""
+			# revert(f'Yes, about to transfer to {_to}, from {_from}, {_value} sICX. '
+			# 	   f'Forwarding data = {_data.decode("utf-8")}')
 			recipient_score = self.create_interface_score(_to, TokenFallbackInterface)
 			recipient_score.tokenFallback(_from, _value, _data)
 
@@ -236,6 +232,7 @@ class IRC2(TokenStandard, IconScoreBase):
 		if amount <= 0:
 			raise ZeroValueError("Invalid Value")
 			pass
+
 		self._beforeTokenTransfer(0, account, amount)
 
 		self._total_supply.set(self._total_supply.get() + amount)

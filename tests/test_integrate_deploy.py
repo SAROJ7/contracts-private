@@ -15,6 +15,7 @@
 # from iconsdk.utils.convert_type import convert_hex_str_to_int
 # import time
 # from .repeater import retry
+# from iconservice import Address
 
 # DIR_PATH = os.path.abspath(os.path.dirname(__file__))
 # DEPLOY = ['sicx','staking']
@@ -29,7 +30,8 @@
 #     def setUp(self):
 #         super().setUp()
 #         self.contracts = {}
-#         self.test_account2 = KeyWallet.create()
+#         private2="093f12dba9dc75da81ecafc88de73ef9b311b555939aeb5a875dc6ad8feef424"
+#         self._test2 = KeyWallet.load(bytes.fromhex(private2))
 #         # WARNING: ICON service emulation is not working with IISS.
 #         # You can stake and delegate but can't get any I-Score for reward.
 #         # If you want to test IISS stuff correctly, set self.icon_service and send requests to the network
@@ -40,16 +42,15 @@
 #         # # install SCORE
 #         # self._score_address = self._deploy_score()['scoreAddress']
 
-#         # Deploy SCORE
-#         for x in range(3):
-#             for address in DEPLOY:
-#                 self.SCORE_PROJECT = self.SCORES + "/" + address
-#                 print(self.SCORE_PROJECT)
-#                 print('======================================================================')
-#                 print('Deploying '+ address + 'Contract in Testnet')
-#                 print('----------------------------------------------------------------------')
-#                 self.contracts[address] = self._deploy_score()['scoreAddress']
-#             self._setVariablesAndInterface()
+#         # # Deploy SCORE
+#         # for address in DEPLOY:
+#         #     self.SCORE_PROJECT = self.SCORES + "/" + address
+#         #     print(self.SCORE_PROJECT)
+#         #     print('======================================================================')
+#         #     print('Deploying '+ address + 'Contract in Testnet')
+#         #     print('----------------------------------------------------------------------')
+#         #     self.contracts[address] = self._deploy_score()['scoreAddress']
+#         # self._setVariablesAndInterface()
 
 
 #     #Process the transaction in pagoda testnet
@@ -121,30 +122,30 @@
 #         self.assertTrue('scoreAddress' in _tx_result)
 #         return _tx_result
 
-#     # def test_score_update(self):
-#     #     # update SCORE
-#     #     for address in DEPLOY:
-#     #         print('======================================================================')
-#     #         print('Test Score Update('+address+')')
-#     #         print('----------------------------------------------------------------------')
-#     #         self.SCORE_PROJECT = self.SCORES + "/" + address
-#     #         SCORE_PROJECT = os.path.abspath(
-#     #             os.path.join(DIR_PATH, '..')) + "/" + address
-#     #         tx_result = self._deploy_score(self.contracts[address], 'update')
-#     #         self.assertEqual(
-#     #             self.contracts[address], tx_result['scoreAddress'])
-
-#     def test_get_sICX_address(self):
+#     def test_score_update(self):
+#         # update SCORE
 #         print('======================================================================')
-#         print('Test Get sICX Address')
+#         print('Test Score Update')
 #         print('----------------------------------------------------------------------')
+#         self.SCORE_PROJECT = self.SCORES + "/" + 'staking'
+#         SCORE_PROJECT = os.path.abspath(
+#             os.path.join(DIR_PATH, '..')) + "/" + 'staking'
+#         tx_result = self._deploy_score('cx25c39ed0d27853e44af8ab2739d6af832f35d533', 'update')
+#         # self.assertEqual(
+#         #     self.contracts['staking'], tx_result[Address.from_string('cxf73a09e1d4b2bf6c6bdb21a8673ad2420bfe01ff')])
 
-#         _call = CallBuilder().from_(self._test1.get_address()) \
-#             .to(self.contracts['staking']) \
-#             .method("getSicxAddress") \
-#             .build()
+#     # def test_get_sICX_address(self):
+#     #     print('======================================================================')
+#     #     print('Test Get sICX Address')
+#     #     print('----------------------------------------------------------------------')
 
-#         response = self.get_tx_result(_call)
-#         # check call result
-#         print (response)
-#         self.assertEqual(self.contracts['sicx'], response)
+#     #     _call = CallBuilder().from_(self._test1.get_address()) \
+#     #         .to(self.contracts['staking']) \
+#     #         .method("getSicxAddress") \
+#     #         .build()
+
+#     #     response = self.get_tx_result(_call)
+#     #     # check call result
+#     #     print (response)
+#     #     self.assertEqual(self.contracts['sicx'], response)
+
